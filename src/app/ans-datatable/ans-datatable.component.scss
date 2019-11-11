@@ -1,0 +1,105 @@
+.datatable {
+    background: #ffffff;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 16px;
+  
+    .datatable-header {
+      &__label {
+        border: solid;
+        border-color: rgba(0,0,0,.54);
+        padding: 7px;
+  
+        &--alone {
+          border-width: 1px;
+        }
+  
+        &--first {
+          border-width: 1px 0px 1px 1px;
+        }
+  
+        &--middle {
+          border-width: 1px 0px;
+        }
+  
+        &--last {
+          border-width: 1px 1px 1px 0px;
+        }
+      }
+    }
+  
+  
+    .datatable-body {
+  
+      &__row-cell {
+        border: solid;
+        border-color: rgba(0,0,0,.54);
+        padding: 7px;
+        &--odd {
+          background-color: rgb(238, 238, 238);
+        }
+  
+        &--even {
+          background-color: #ffffff;
+        }
+  
+        &--alone {
+          border-width: 0px 1px;
+        }
+  
+        &--first {
+          border-left-width: 1px;
+        }
+  
+        &--last {
+          border-right-width: 1px;
+        }
+  
+        &--no-data{
+          font-style: italic;
+          font-size: 18px;
+          font-weight: bold;
+          background-color: rgb(238, 238, 238);
+          border-width: 0px 1px;
+        }
+      }
+    }
+  
+  
+    .datatable-footer {
+      border: solid;
+      border-width: 1px;
+      border-color: rgba(0,0,0,.54);;
+      padding: 4px;
+      
+      label {
+        vertical-align: middle;
+        border: solid;
+      }
+  
+      .pagination {
+        &__page {
+          margin: 0px 5px;
+  
+          &--active {
+            border-width: 1px;
+            border-color: transparent;
+            border-radius: 7px;
+            font-weight: bold;
+            font-size: 17px;
+            color: black;
+            padding: 3px;
+            background-color: rgba(158,158,158,.2);
+          }
+  
+          &--deactive {
+            color: rgba(0,0,0,.26);
+          }
+        }
+      }
+  
+      &__page-count {
+        margin: 0px 0px 0px 3px;
+      }
+    }
+  }
+  

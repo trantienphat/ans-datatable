@@ -1,0 +1,53 @@
+<GridLayout class="datatable" witdh="{{witdh}}" height="{{height}}" columns="{{columns}}" rows="{{rows}}">
+    <ng-container datatable-header *ngFor="let name of headerNames; let i = index">
+        <TextView  class="datatable-header__label" 
+                [ngClass]="{'datatable-header__label--alone': headerNames.length == 1,
+                            'datatable-header__label--first': i == 0 && headerNames.length > 1,
+                            'datatable-header__label--last': i == headerNames.length - 1 && headerNames.length > 1,
+                            'datatable-header__label--middle': i != 0 && i != headerNames.length - 1 && headerNames.length > 1}"
+                text="{{name}}"
+                col="{{i}}"
+                row="0"
+                editable="false"
+                textWrap="false"></TextView>
+    </ng-container>
+
+    <ng-container *ngIf="pageData.length">
+            <ng-container datatable-body *ngFor="let item of pageData; let i = index;odd as isOdd; even as isEven">
+                    <ng-container *ngFor="let property of _structureDisplay; let j = index">
+                            <TextView   class="datatable-body__row-cell" 
+                                        [ngClass]="{'datatable-body__row-cell--odd': isOdd,
+                                                    'datatable-body__row-cell--even': isEven,
+                                                    'datatable-body__row-cell--alone': pageSize == 1 && _structureDisplay.length == 1,
+                                                    'datatable-body__row-cell--first': _structureDisplay.length > 1 && j == 0,
+                                                    'datatable-body__row-cell--last': _structureDisplay.length > 1 && j == _structureDisplay.length - 1}"
+                                        text="{{item[property]}}" 
+                                        col="{{j}}" 
+                                        row="{{i + 1}}" 
+                                        colSpan="{{colSpan}}"
+                                        editable="false"
+                                        textWrap="false"
+                                        (tap)="selected(item)"></TextView> 
+                    </ng-container>
+                </ng-container>
+    </ng-container>
+
+
+    <ng-container *ngIf="!pageData.length">
+        <TextView class="datatable-body__row-cell datatable-body__row-cell--no-data" text="No data to display" col="0" row="1" colSpan="{{colSpan}}"></TextView>
+    </ng-container>
+
+    <DockLayout datatable-footer class="datatable-footer" col="0" row="{{footerRow}}" colSpan="{{colSpan}}" >
+        <StackLayout class="pagination" dock="right" orientation="horizontal">
+                <Label class="fas pagination__page" [ngClass]="{'pagination__page--deactive': !canPrevious()}" text="&#xf100;" (tap)="setPage(1)"></Label>
+                <Label class="fas pagination__page" [ngClass]="{'pagination__page--deactive': !canPrevious()}" text="&#xf104;" (tap)="previousPage()"></Label>
+                <ng-container *ngFor="let page of pages">
+                    <Label class="pagination__page" [ngClass]="{'pagination__page--active': page == pageIndex}" text="{{page}}" (tap)="setPage(page)"></Label>
+                </ng-container>
+                <Label class="fas pagination__page" [ngClass]="{'pagination__page--deactive': !canNext()}" text="&#xf105;" (tap)="nextPage()"></Label>
+                <Label class="fas pagination__page" [ngClass]="{'pagination__page--deactive': !canNext()}" text="&#xf101;" (tap)="setPage(totalPages)"></Label>
+        </StackLayout>
+        <Label class="datatable-footer__page-count" text="{{_totalItems}} total" dock="left"></Label>
+    </DockLayout >
+
+</GridLayout>
